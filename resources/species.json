@@ -10,7 +10,8 @@
     "ran_weights": [7, 3, 3, 3, 1, 1],
     "in_weights": {
         "worker drone": [7, 3, 3, 3, 0, 0],
-        "disassembly drone": [7, 3, 3, 3, 0, 0],
+        "female disassembly drone": [7, 3, 3, 3, 0, 0],
+        "male disassembly drone": [7, 3, 3, 3, 0, 0],
         "solver infected worker drone": [7, 3, 3, 3, 0, 0],
         "worker x disassembly drone hybrid": [7, 3, 3, 3, 0, 0],
         "solver infected worker x disassembly drone hybrid": [7, 3, 3, 3, 0, 0]
