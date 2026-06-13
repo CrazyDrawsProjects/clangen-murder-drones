@@ -774,22 +774,6 @@ class ProfileScreen(Screens):
                 "screens.profile.eyes_label", eyes=the_cat.pelt.describe_eyes()
             )
         # NEWLINE ----------
-        output += "\n"
-
-        # PELT TYPE
-        output += i18n.t(
-            "screens.profile.pelt_label",
-            pelt=i18n.t(f"cat.pelts.{the_cat.pelt.name}").lower(),
-        )
-        # NEWLINE ----------
-        output += "\n"
-
-        # PELT LENGTH
-        output += i18n.t(
-            "screens.profile.fur_label",
-            length=i18n.t(f"cat.pelts.fur_{the_cat.pelt.length}"),
-        )
-        # NEWLINE ----------
 
         # ACCESSORY
         if the_cat.pelt.accessory:
