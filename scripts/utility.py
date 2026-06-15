@@ -703,7 +703,7 @@ def create_new_cat(
     kit: bool = False,
     litter: bool = False,
     backstory: bool = None,
-    species:str=None,
+    species: str = None,
     rank: CatRank = None,
     original_social: CatSocial = CatSocial.CLANCAT,
     original_group: CatGroup = None,
@@ -2733,19 +2733,23 @@ def generate_sprite(
     # generating the sprite
     try:
         # checks index of cat's species in the species list and uses matching folder's sprites
-        n = (list(game.species["species"]).index(cat.species)) + 1 #add 1 because people don't count from 0 smh
+        n = (
+            list(game.species["species"]).index(cat.species)
+        ) + 1  # add 1 because people don't count from 0 smh
 
         if cat.pelt.name not in ["Tortie", "Calico"]:
             new_sprite.blit(
                 sprites.sprites[
-                    cat.pelt.get_sprites_name() + f'{n}_' + cat.pelt.colour + cat_sprite
+                    cat.pelt.get_sprites_name() + f"{n}_" + cat.pelt.colour + cat_sprite
                 ],
                 (0, 0),
             )
         else:
             # Base Coat
             new_sprite.blit(
-                sprites.sprites[cat.pelt.tortiebase + f'{n}_' + cat.pelt.colour + cat_sprite],
+                sprites.sprites[
+                    cat.pelt.tortiebase + f"{n}_" + cat.pelt.colour + cat_sprite
+                ],
                 (0, 0),
             )
 
@@ -2756,10 +2760,10 @@ def generate_sprite(
                 tortie_pattern = cat.pelt.tortiepattern
 
             patches = sprites.sprites[
-                tortie_pattern + f'{n}_' + cat.pelt.tortiecolour + cat_sprite
+                tortie_pattern + f"{n}_" + cat.pelt.tortiecolour + cat_sprite
             ].copy()
             patches.blit(
-                sprites.sprites["tortiemask" + f'{n}_' + cat.pelt.pattern + cat_sprite],
+                sprites.sprites["tortiemask" + f"{n}_" + cat.pelt.pattern + cat_sprite],
                 (0, 0),
                 special_flags=pygame.BLEND_RGBA_MULT,
             )
@@ -2789,7 +2793,7 @@ def generate_sprite(
         # draw white patches
         if cat.pelt.white_patches is not None:
             white_patches = sprites.sprites[
-                "white" + f'{n}_' + cat.pelt.white_patches + cat_sprite
+                "white" + f"{n}_" + cat.pelt.white_patches + cat_sprite
             ].copy()
 
             # Apply tint to white patches.
@@ -2813,7 +2817,9 @@ def generate_sprite(
         # draw vit & points
 
         if cat.pelt.points:
-            points = sprites.sprites["white" + f'{n}_' + cat.pelt.points + cat_sprite].copy()
+            points = sprites.sprites[
+                "white" + f"{n}_" + cat.pelt.points + cat_sprite
+            ].copy()
             if (
                 cat.pelt.white_patches_tint != "none"
                 and cat.pelt.white_patches_tint
@@ -2832,14 +2838,18 @@ def generate_sprite(
 
         if cat.pelt.vitiligo:
             new_sprite.blit(
-                sprites.sprites["white" + f'{n}_' + cat.pelt.vitiligo + cat_sprite], (0, 0)
+                sprites.sprites["white" + f"{n}_" + cat.pelt.vitiligo + cat_sprite],
+                (0, 0),
             )
 
         # draw eyes & scars1
-        eyes = sprites.sprites["eyes" + f'{n}_' + cat.pelt.eye_colour + cat_sprite].copy()
+        eyes = sprites.sprites[
+            "eyes" + f"{n}_" + cat.pelt.eye_colour + cat_sprite
+        ].copy()
         if cat.pelt.eye_colour2 != None:
             eyes.blit(
-                sprites.sprites["eyes2" + f'{n}_' + cat.pelt.eye_colour2 + cat_sprite], (0, 0)
+                sprites.sprites["eyes2" + f"{n}_" + cat.pelt.eye_colour2 + cat_sprite],
+                (0, 0),
             )
         new_sprite.blit(eyes, (0, 0))
 
@@ -2847,37 +2857,41 @@ def generate_sprite(
             for scar in cat.pelt.scars:
                 if scar in cat.pelt.scars1:
                     new_sprite.blit(
-                        sprites.sprites["scars" + f'{n}_' + scar + cat_sprite], (0, 0)
+                        sprites.sprites["scars" + f"{n}_" + scar + cat_sprite], (0, 0)
                     )
                 if scar in cat.pelt.scars3:
                     new_sprite.blit(
-                        sprites.sprites["scars" + f'{n}_' + scar + cat_sprite], (0, 0)
+                        sprites.sprites["scars" + f"{n}_" + scar + cat_sprite], (0, 0)
                     )
 
         # draw line art
         if game_setting_get("shaders") and not dead:
             new_sprite.blit(
-                sprites.sprites["shaders" + f'{n}_' + cat_sprite],
+                sprites.sprites["shaders" + f"{n}_" + cat_sprite],
                 (0, 0),
                 special_flags=pygame.BLEND_RGB_MULT,
             )
-            new_sprite.blit(sprites.sprites["lighting" + f'{n}_' + cat_sprite], (0, 0))
+            new_sprite.blit(sprites.sprites["lighting" + f"{n}_" + cat_sprite], (0, 0))
 
         if not dead:
-            new_sprite.blit(sprites.sprites["lines" f'{n}_' + cat_sprite], (0, 0))
+            new_sprite.blit(sprites.sprites["lines" f"{n}_" + cat_sprite], (0, 0))
         elif cat.status.group == CatGroup.DARK_FOREST:
-            new_sprite.blit(sprites.sprites["lineartdf" f'{n}_' + cat_sprite], (0, 0))
+            new_sprite.blit(sprites.sprites["lineartdf" f"{n}_" + cat_sprite], (0, 0))
         elif dead:
-            new_sprite.blit(sprites.sprites["lineartdead" + f'{n}_' + cat_sprite], (0, 0))
+            new_sprite.blit(
+                sprites.sprites["lineartdead" + f"{n}_" + cat_sprite], (0, 0)
+            )
         # draw skin and scars2
         blendmode = pygame.BLEND_RGBA_MIN
-        new_sprite.blit(sprites.sprites["skin" + f'{n}_' + cat.pelt.skin + cat_sprite], (0, 0))
+        new_sprite.blit(
+            sprites.sprites["skin" + f"{n}_" + cat.pelt.skin + cat_sprite], (0, 0)
+        )
 
         if not scars_hidden:
             for scar in cat.pelt.scars:
                 if scar in cat.pelt.scars2:
                     new_sprite.blit(
-                        sprites.sprites["scars" + f'{n}_' + scar + cat_sprite],
+                        sprites.sprites["scars" + f"{n}_" + scar + cat_sprite],
                         (0, 0),
                         special_flags=blendmode,
                     )
@@ -2898,17 +2912,23 @@ def generate_sprite(
                     if accessory in getattr(Pelt, category):
                         if accessory in cat.pelt.plant_accessories:
                             new_sprite.blit(
-                                sprites.sprites["acc_herbs" + f'{n}_' + accessory + cat_sprite],
+                                sprites.sprites[
+                                    "acc_herbs" + f"{n}_" + accessory + cat_sprite
+                                ],
                                 (0, 0),
                             )
                         elif accessory in cat.pelt.wild_accessories:
                             new_sprite.blit(
-                                sprites.sprites["acc_wild" + f'{n}_' + accessory + cat_sprite],
+                                sprites.sprites[
+                                    "acc_wild" + f"{n}_" + accessory + cat_sprite
+                                ],
                                 (0, 0),
                             )
                         elif accessory in cat.pelt.collars:
                             new_sprite.blit(
-                                sprites.sprites["collars" + f'{n}_' + accessory + cat_sprite],
+                                sprites.sprites[
+                                    "collars" + f"{n}_" + accessory + cat_sprite
+                                ],
                                 (0, 0),
                             )
 
@@ -2928,17 +2948,19 @@ def generate_sprite(
                 stage = "2"
 
             new_sprite.blit(
-                sprites.sprites["fademask" + f'{n}_' + stage + cat_sprite],
+                sprites.sprites["fademask" + f"{n}_" + stage + cat_sprite],
                 (0, 0),
                 special_flags=pygame.BLEND_RGBA_MULT,
             )
 
             if cat.status.group == CatGroup.DARK_FOREST:
-                temp = sprites.sprites["fadedf" f'{n}_' + stage + cat_sprite].copy()
+                temp = sprites.sprites["fadedf" f"{n}_" + stage + cat_sprite].copy()
                 temp.blit(new_sprite, (0, 0))
                 new_sprite = temp
             else:
-                temp = sprites.sprites["fadestarclan" + f'{n}_' + stage + cat_sprite].copy()
+                temp = sprites.sprites[
+                    "fadestarclan" + f"{n}_" + stage + cat_sprite
+                ].copy()
                 temp.blit(new_sprite, (0, 0))
                 new_sprite = temp
 

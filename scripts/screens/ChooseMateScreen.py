@@ -876,7 +876,6 @@ class ChooseMateScreen(Screens):
             object_id="#text_box_34_horizcenter",
         )
 
-
         info = self.the_cat.get_info_block()
 
         if self.the_cat.mate:
@@ -1036,7 +1035,6 @@ class ChooseMateScreen(Screens):
             object_id="#text_box_34_horizcenter",
         )
 
-
         info = self.selected_cat.get_info_block()
 
         if self.selected_cat.mate:
@@ -1050,7 +1048,7 @@ class ChooseMateScreen(Screens):
             object_id="#text_box_22_horizcenter_vertcenter_spacing_95",
             manager=MANAGER,
         )
-        
+
         if self.kits_selected_pair:
             self.update_offspring_container()
 
@@ -1072,24 +1070,41 @@ class ChooseMateScreen(Screens):
             )
 
         if (
-            (not get_clan_setting("same sex birth")
-            and self.the_cat.gender == self.selected_cat.gender)
+            (
+                not get_clan_setting("same sex birth")
+                and self.the_cat.gender == self.selected_cat.gender
+            )
             or any("no_breed" in tag for tag in self.species_dict[self.the_cat.species])
-            or any("no_breed" in tag for tag in self.species_dict[self.selected_cat.species])
+            or any(
+                "no_breed" in tag
+                for tag in self.species_dict[self.selected_cat.species]
+            )
             or (
-                any("exc_breed" in tag for tag in self.species_dict[self.the_cat.species])
+                any(
+                    "exc_breed" in tag
+                    for tag in self.species_dict[self.the_cat.species]
+                )
                 and self.the_cat.species != self.selected_cat.species
             )
             or (
-                any("exc_breed" in tag for tag in self.species_dict[self.selected_cat.species])
+                any(
+                    "exc_breed" in tag
+                    for tag in self.species_dict[self.selected_cat.species]
+                )
                 and self.the_cat.species != self.selected_cat.species
             )
             or (
-                any("diff_breed" in tag for tag in self.species_dict[self.the_cat.species])
+                any(
+                    "diff_breed" in tag
+                    for tag in self.species_dict[self.the_cat.species]
+                )
                 and self.the_cat.species == self.selected_cat.species
             )
             or (
-                any("diff_breed" in tag for tag in self.species_dict[self.selected_cat.species])
+                any(
+                    "diff_breed" in tag
+                    for tag in self.species_dict[self.selected_cat.species]
+                )
                 and self.the_cat.species == self.selected_cat.species
             )
         ):
@@ -1223,25 +1238,48 @@ class ChooseMateScreen(Screens):
             )
             and (
                 (
-                    not any("no_breed" in tag for tag in self.species_dict[self.the_cat.species])
-                    and (not any("no_breed" in tag for tag in self.species_dict[i.species]))
+                    not any(
+                        "no_breed" in tag
+                        for tag in self.species_dict[self.the_cat.species]
+                    )
+                    and (
+                        not any(
+                            "no_breed" in tag for tag in self.species_dict[i.species]
+                        )
+                    )
                 )
                 and (
                     (
-                    not any("exc_breed" in tag for tag in self.species_dict[self.the_cat.species])
-                    and (not any("exc_breed" in tag for tag in self.species_dict[i.species]))
+                        not any(
+                            "exc_breed" in tag
+                            for tag in self.species_dict[self.the_cat.species]
+                        )
+                        and (
+                            not any(
+                                "exc_breed" in tag
+                                for tag in self.species_dict[i.species]
+                            )
+                        )
                     )
                     or self.the_cat.species == i.species
-                    )
+                )
                 and (
                     (
-                    not any("diff_breed" in tag for tag in self.species_dict[self.the_cat.species])
-                    and (not any("diff_breed" in tag for tag in self.species_dict[i.species]))
+                        not any(
+                            "diff_breed" in tag
+                            for tag in self.species_dict[self.the_cat.species]
+                        )
+                        and (
+                            not any(
+                                "diff_breed" in tag
+                                for tag in self.species_dict[i.species]
+                            )
+                        )
                     )
                     or self.the_cat.species != i.species
-                    )
-                or not self.have_kits_only
                 )
+                or not self.have_kits_only
+            )
         ]
 
         return valid_mates

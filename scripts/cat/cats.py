@@ -267,7 +267,14 @@ class Cat:
             weights = constants.SPECIES["ran_weights"]
             in_weights = constants.SPECIES["in_weights"]
 
-            Cat.generate_species(self, species_dict, weights, in_weights, self.par2species if self.par2species else None, [Cat.fetch_cat(i) for i in (self.parent1, self.parent2) if i])
+            Cat.generate_species(
+                self,
+                species_dict,
+                weights,
+                in_weights,
+                self.par2species if self.par2species else None,
+                [Cat.fetch_cat(i) for i in (self.parent1, self.parent2) if i],
+            )
 
         # age and status
         if status_dict is None and moons is None:
@@ -327,9 +334,13 @@ class Cat:
 
         # sex!?!??!?!?!??!?!?!?!??
         if self.gender is None:
-            if any("always_f" in tag for tag in constants.SPECIES["species"][self.species]):
+            if any(
+                "always_f" in tag for tag in constants.SPECIES["species"][self.species]
+            ):
                 self.gender = "female"
-            elif any("always_m" in tag for tag in constants.SPECIES["species"][self.species]):
+            elif any(
+                "always_m" in tag for tag in constants.SPECIES["species"][self.species]
+            ):
                 self.gender = "male"
             else:
                 self.gender = (
@@ -512,7 +523,9 @@ class Cat:
         if not skill_dict:
             self.skills = CatSkills.generate_new_catskills(self.status.rank, self.age)
 
-    def generate_species(self, species_dict, weights, in_weights, par2species, parents:tuple=()):
+    def generate_species(
+        self, species_dict, weights, in_weights, par2species, parents: tuple = ()
+    ):
         species_list = list(species_dict)
         if parents:
             par_species = []
@@ -532,19 +545,28 @@ class Cat:
             if not par_species:
                 print("[SPS] Warning - par_species none: species randomized")
                 self.species = choices(species_list, weights=weights, k=1)[0]
-            
+
             for s in par_species:
                 # check dom and rec tag
                 if any("dom_inh" in tag for tag in species_dict[s]):
-                    if not any("dom_inh" in tag for tag in species_dict[par_species[par_species.index(s)-1]]):
+                    if not any(
+                        "dom_inh" in tag
+                        for tag in species_dict[par_species[par_species.index(s) - 1]]
+                    ):
                         par_weights = in_weights[s]
                         break
-                        
+
                 elif any("rec_inh" in tag for tag in species_dict[s]):
-                    if not any("rec_inh" in tag for tag in species_dict[par_species[par_species.index(s)-1]]):
+                    if not any(
+                        "rec_inh" in tag
+                        for tag in species_dict[par_species[par_species.index(s) - 1]]
+                    ):
                         continue
                 else:
-                    if any("dom_inh" in tag for tag in species_dict[par_species[par_species.index(s)-1]]):
+                    if any(
+                        "dom_inh" in tag
+                        for tag in species_dict[par_species[par_species.index(s) - 1]]
+                    ):
                         continue
 
                 # get inheritance weights and add them together
@@ -555,14 +577,18 @@ class Cat:
             try:
                 self.species = choices(species_list, weights=par_weights, k=1)[0]
             except:
-                print("[SPS] Warning - failed to generate species. Are all inheritance weights set to zero?")
-                print("[SPS] Parent species: "+str(par_species))
+                print(
+                    "[SPS] Warning - failed to generate species. Are all inheritance weights set to zero?"
+                )
+                print("[SPS] Parent species: " + str(par_species))
                 self.species = species_list[0]
         else:
             try:
                 self.species = choices(species_list, weights=weights, k=1)[0]
             except:
-                print("[SPS] Warning - failed to generate species. Are all random weights set to zero?")
+                print(
+                    "[SPS] Warning - failed to generate species. Are all random weights set to zero?"
+                )
                 self.species = species_list[0]
 
     def __repr__(self):

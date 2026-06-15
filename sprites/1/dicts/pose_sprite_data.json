@@ -39,5 +39,12 @@
         "para_young0",
         "sick_adult0",
         "sick_young0"
-    ]
+    ],
+    "fallback": {
+        "adult": [
+            "young adult",
+            "adult",
+            "senior adult"
+        ]
+    }
 }
