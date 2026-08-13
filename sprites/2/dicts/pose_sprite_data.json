@@ -39,5 +39,16 @@
         "para_young0",
         "sick_adult0",
         "sick_young0"
-    ]
+    ],
+    "fallback": {
+        "kitten": ["newborn"],
+        "adult": [
+            "adolescent",
+            "young adult",
+            "adult",
+            "senior adult",
+            "senior",
+            "para_adult"
+        ]
+    }
 }

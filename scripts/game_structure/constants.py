@@ -199,13 +199,13 @@ with open("resources/display_settings.toml", "r", encoding="utf-8") as read_file
 with open("resources/placements.json", "r", encoding="utf-8") as read_file:
     LAYOUTS = ujson.loads(read_file.read())
 
-with open(f"resources/species.json", 'r') as read_file:
+with open(f"resources/species.json", "r") as read_file:
     SPECIES = ujson.loads(read_file.read())
 
 # count amount of folders excluding faded folder
 SPRITE_FOLDERS = set()
-for x in(next(walk('sprites'))[1]):
-    if not x in ['faded', 'dicts']:
+for x in next(walk("sprites"))[1]:
+    if not x in ["faded", "dicts"]:
         SPRITE_FOLDERS.add(x)
 
 CUSTOM_CURSOR = Cursor((9, 0), image.load("resources/images/cursor.png"))

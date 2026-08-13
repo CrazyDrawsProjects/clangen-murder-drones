@@ -682,20 +682,21 @@ class Pregnancy_Events:
         # check for exclusive and different breed tags
         if (
             (
-                (
                 any("exc_breed" in tag for tag in species_dict[cat.species])
-                or any("exc_breed" in tag for tag in species_dict[second_parent.species])
+                or any(
+                    "exc_breed" in tag for tag in species_dict[second_parent.species]
                 )
-                and cat.species != second_parent.species
             )
-            or (
-                (
+            and cat.species != second_parent.species
+        ) or (
+            (
                 any("diff_breed" in tag for tag in species_dict[cat.species])
-                or any("diff_breed" in tag for tag in species_dict[second_parent.species])
+                or any(
+                    "diff_breed" in tag for tag in species_dict[second_parent.species]
                 )
-                and cat.species == second_parent.species
-                )
-            ):
+            )
+            and cat.species == second_parent.species
+        ):
             return False, True
 
         # Check to see if the pair can have kits.
@@ -706,7 +707,6 @@ class Pregnancy_Events:
                 return False, False
             else:
                 return True, True
-
 
         return True, False
 
@@ -900,16 +900,27 @@ class Pregnancy_Events:
         for species in species_list:
             if cat:
                 if (
-                    any("no_breed" in tag for tag in constants.SPECIES["species"][species])
-                    or any("exc_breed" in tag for tag in constants.SPECIES["species"][species]) and species != cat.species
-                    or any("diff_breed" in tag for tag in constants.SPECIES["species"][species]) and species == cat.species
-                    ):
+                    any(
+                        "no_breed" in tag
+                        for tag in constants.SPECIES["species"][species]
+                    )
+                    or any(
+                        "exc_breed" in tag
+                        for tag in constants.SPECIES["species"][species]
+                    )
+                    and species != cat.species
+                    or any(
+                        "diff_breed" in tag
+                        for tag in constants.SPECIES["species"][species]
+                    )
+                    and species == cat.species
+                ):
                     weights.pop((species_list.index(species)))
                     species_list.remove(species)
             else:
-                if (
-                    any("no_breed" in tag for tag in constants.SPECIES["species"][species])
-                    ):
+                if any(
+                    "no_breed" in tag for tag in constants.SPECIES["species"][species]
+                ):
                     weights.pop((species_list.index(species)))
                     species_list.remove(species)
 

@@ -121,7 +121,9 @@ print("")
 print("Running on SPS Framework")
 print("    Version: " + get_version_info().sps_version)
 print("Created by a.corn(afellowcorn)")
-print("Official documentation: https://docs.google.com/document/d/1ZwXM-e1TEsUr7tzTtXxek-AKO8e3gGARRiW6JeevShc")
+print(
+    "Official documentation: https://docs.google.com/document/d/1ZwXM-e1TEsUr7tzTtXxek-AKO8e3gGARRiW6JeevShc"
+)
 print("")
 
 import pygame_gui
