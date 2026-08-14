@@ -545,12 +545,7 @@ class Cat:
             if par_species == ['worker drone', 'disassembly drone']:
                 self.species = "worker x disassembly drone hybrid"
             else:
-                self.species = choices(species_list, weights=(1, 1, 1, 0, 0), k=1)[0]
-
-            if par_species == ['solver infected worker drone', 'disassembly drone']:
-                self.species = "solver infected worker x disassembly drone hybrid"
-            else:
-                self.species = choices(species_list, weights=(1, 1, 1, 0, 0), k=1)[0]
+                self.species = choices(species_list, weights=(1, 1, 1), k=1)[0]
 
             if not par_species:
                 print("[SPS] Warning - par_species none: species randomized")

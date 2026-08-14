@@ -1,0 +1,7 @@
+newborn = [0, 3]
+  kitten = [4, 155]
+  adolescent = [156, 215]
+  "young adult" = [216, 408]
+  adult = [409, 468]
+  "senior adult" = [469, 768]
+  senior = [769, 1200]
