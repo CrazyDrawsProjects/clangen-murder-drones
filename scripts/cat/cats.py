@@ -523,6 +523,18 @@ class Cat:
         if not skill_dict:
             self.skills = CatSkills.generate_new_catskills(self.status.rank, self.age)
 
+        # Give Solver
+        if self.gender == "female":
+            if self.parent1 is not None and self.parent2 is not None:
+                p1_infected = "solver infected" in self.parent1.permanent_condition
+                p2_infected = "solver infected" in self.parent2.permanent_condition
+                if p1_infected or p2_infected:
+                    if randint(1, 2) == 1:
+                        self.permanent_condition.append("solver infected")
+            else:
+                if randint(1, 100) <= 5:
+                    self.permanent_condition.append("solver infected")
+
     def generate_species(
         self, species_dict, weights, in_weights, par2species, parents: tuple = ()
     ):
